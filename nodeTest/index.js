@@ -70,9 +70,35 @@ app.get('/delete-students',function(req,res){
 
 });
 
-app.get('/update-student',function(req,res){
-
-    res.redirect('/update');
-
+app.get('/update-students',function(req,res){
+    con.connect(function(error){
+        if(error) throw error;
+    var up_id = req.query.id;
+    var select_data = "select * from students where id=?";
+    con.query(select_data,[up_id], function(error,result){
+        if(error) throw error;
+        res.render(__dirname+'/student_update',{students:result});
+    });
+    });
+    
 });
+
+app.post('/update-students',function(req,res){
+
+    var name = req.body.name;
+    var mob = req.body.mob;
+    var email = req.body.email;
+    var id = req.body.id;
+
+    con.connect(function(error){
+        if(error) throw error;
+    var up_id = req.query.id;
+    var select_data = "update students set name=?,mob=?,email=? where id=?";
+    con.query(select_data,[name,mob,email,id], function(error,result){
+        if(error) throw error;
+        res.redirect('/students');
+    });
+    }); 
+});
+
 app.listen(5050);
