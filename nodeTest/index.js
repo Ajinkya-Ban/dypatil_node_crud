@@ -101,4 +101,32 @@ app.post('/update-students',function(req,res){
     }); 
 });
 
+
+app.get('/search-students', function(req,res){
+
+    con.connect(function(error){
+        if(error) throw error;
+        var select_query = "select * from students";
+        con.query(select_query, function(error, result){
+            res.render(__dirname+'/search-student',{students:result});
+        });
+    });
+});
+
+app.get('/search', function(req,res){
+    con.connect(function(error){
+        if(error) throw error;
+
+        var name =  req.query.name;
+        var mob = req.query.mob;
+        var search_query = "select * from students where name like '"+name+"%' and mob like '%"+mob+"%'";
+        con.query(search_query, function(error, result){
+            if(error) throw error;
+            res.render(__dirname+'/search-student',{students:result});
+        });
+    });
+});
+
+
+
 app.listen(5050);

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <center>
+    <h1>Serach Students</h1>
+    <form action="/search" method="get">
+        <input type="search" name="name" placeholder="Search by name" autocomplete="off">
+        <input type="search" name="mob" placeholder="Search by mobile" autocomplete="off">
+        <input type="submit" value="Search">
+    </form>
+</center><br><br>
+    <table border="1" width="80%" align="center">
+        <tr>
+            <th>ID</th>
+            <th>Student Name</th>
+            <th>Student Mobile</th>
+            <th>Student Email</th>
+           
+        </tr>
+
+
+        <% if(students.length > 0) { %>
+            <% for(var i=0; i<students.length; i++){ %>
+
+                <tr>
+                    <td><%- students[i].id  %></td>
+                    <td><%- students[i].name  %></td>
+                    <td><%- students[i].mob  %></td>
+                    <td><%- students[i].email  %></td>
+                </tr>
+
+            <% } %>
+
+        <% } else { %>
+        <h2>Student not found</h2>
+        <% }%>
+
+    </table>
+</body>
+</html>
