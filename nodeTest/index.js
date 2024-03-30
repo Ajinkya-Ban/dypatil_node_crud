@@ -19,7 +19,7 @@ var bodyparser = require('body-parser');
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:true}));
 app.set('view engine','ejs');
-
+app.use('/css',express.static('css'));
 
 app.get('/', function(req,res){
     res.sendFile(__dirname+'/register.html');
@@ -54,6 +54,25 @@ app.get('/students',function(req,res){
     });
 });
 
+app.get('/delete-students',function(req,res){
 
+    con.connect(function(error){
 
+        if(error) throw error;
+        var del_id = req.query.id;
+        var del_query = "delete from students where id=?";
+        con.query(del_query,[del_id], function(error, result){
+            if(error) throw error;
+            res.redirect('/students');
+
+        });
+    });
+
+});
+
+app.get('/update-student',function(req,res){
+
+    res.redirect('/update');
+
+});
 app.listen(5050);

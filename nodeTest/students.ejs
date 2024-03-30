@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <table border="1" width="80%" align="center">
@@ -12,6 +13,7 @@
             <th>Student Name</th>
             <th>Student Mobile</th>
             <th>Student Email</th>
+            <th>Actions</th>
         </tr>
 
 
@@ -23,6 +25,10 @@
                     <td><%- students[i].name  %></td>
                     <td><%- students[i].mob  %></td>
                     <td><%- students[i].email  %></td>
+                    <td>
+                        <a href="/delete-students?id=<%- students[i].id  %>">Delete</a>&nbsp;
+                        <a href="/update-student?id=<%- students[i].id  %>" class="update">Update</a>
+                    </td>
                 </tr>
 
             <% } %>
@@ -30,9 +36,6 @@
         <% } else { %>
         <h2>Student not found</h2>
         <% }%>
-
-
-
 
     </table>
 </body>
